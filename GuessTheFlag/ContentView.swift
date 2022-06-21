@@ -9,8 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        LinearGradient(gradient: Gradient(colors: [.white, .black]), startPoint: .top, endPoint: .bottom)
-            .ignoresSafeArea()
+        Button(role: .destructive) {
+            print("Now deleting")
+        } label: {
+            Label("Edit", systemImage: "pencil")
+        }
     }
 }
 
