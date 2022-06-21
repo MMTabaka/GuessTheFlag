@@ -17,9 +17,9 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             RadialGradient(stops: [
-                .init(color: Color(red: 0.1, green: 0.2, blue: 0.45), location: 0.3),
-                .init(color: Color(red: 0.76, green: 0.15, blue: 0.26), location: 0.3),
-            ], center: .top, startRadius: 200, endRadius: 700)
+                .init(color: Color(red: 0.1, green: 0.2, blue: 0.45), location: 0.1),
+                .init(color: Color(red: 0.76, green: 0.15, blue: 0.26), location: 0.9),
+            ], center: .top, startRadius: 200, endRadius: 1000)
             .ignoresSafeArea()
             
             VStack {
@@ -29,13 +29,16 @@ struct ContentView: View {
                     .font(.largeTitle.weight(.bold))
                     .foregroundColor(.white)
                 
+                Spacer()
+                
                 VStack(spacing: 15) {
                     VStack {
                         Text("Tap the flag of")
                             .foregroundStyle(.secondary)
                             .font(.subheadline.weight(.heavy))
                         Text(countries[correctAnswer])
-                            .font(.largeTitle.weight(.semibold))
+                            .font(.largeTitle.weight(.heavy))
+                            .foregroundStyle(.primary)
                     }
                     
                     ForEach(0..<3) { number in
@@ -45,22 +48,23 @@ struct ContentView: View {
                             Image(countries[number])
                                 .renderingMode(.original)
                                 .clipShape(Capsule())
-                                .shadow(radius: 5)
                         }
                     }
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 20)
-                .background(.thinMaterial)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
+                .background(.regularMaterial)
+                .clipShape(RoundedRectangle(cornerRadius: 50))
                 
                 Spacer()
                 Spacer()
+                
                 
                 Text("Score: ???")
                     .foregroundColor(.white)
                     .font(.title.bold())
                 
+                Spacer()
                 Spacer()
             }
             .padding()
