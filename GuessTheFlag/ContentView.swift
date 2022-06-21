@@ -9,36 +9,17 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Group {
-            Spacer()
-            Text("1")
-            Text("1")
-            Text("1")
-            Text("1")
-                Text("1")
-                Text("1")
-                Text("1")
+        ZStack {
+            VStack(spacing: 0) {
+                Color.red
+                Color.blue
             }
-            Group {
-            Text("1")
-            Text("1")
-            Text("1")
-            Text("1")
-            Text("1")
-                Text("1")
-                Text("1")
-                Text("1")
-            }
-            Text("1")
-            Text("1")
-            Text("1")
-            
-            Spacer()
-            Spacer()
-            Spacer()
+            Text("Text")
+                .foregroundStyle(.secondary)
+                .padding(50)
+                .background(.ultraThinMaterial)
         }
-        .border(.green)
+        .ignoresSafeArea()
     }
 }
 
