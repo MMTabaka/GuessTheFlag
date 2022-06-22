@@ -84,6 +84,7 @@ struct ContentView: View {
             Button("Play again") {
                 score = 0
                 currentQuestion = 0
+                askQuestion()
             }
         } message: {
             Text("Your score is \(score)/\(numOfQuestions)")
@@ -98,11 +99,13 @@ struct ContentView: View {
             scoreTitle = "Wrong! That's the flag of \(countries[number])"
         }
         
-        showingScore = true
+        
         currentQuestion += 1
         
         if currentQuestion == numOfQuestions {
             showingEnd = true
+        } else {
+            showingScore = true
         }
     }
     
