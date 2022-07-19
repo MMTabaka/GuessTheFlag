@@ -29,6 +29,9 @@ struct ContentView: View {
     @State private var countries = ["Estonia", "France", "Germany", "Ireland",  "Italy", "Nigeria", "Poland", "Russia", "Spain", "UK", "US"].shuffled()
     @State private var correctAnswer = Int.random(in: 0...2)
     
+    @State private var rotationDegree: Double = 0
+    @State private var pickedFlag: Int = 0
+    
     var body: some View {
         ZStack {
             RadialGradient(stops: [
@@ -58,9 +61,15 @@ struct ContentView: View {
                     
                     ForEach(0..<3) { number in
                         Button {
+                            withAnimation() {
                             flagTapped(number)
+                            pickedFlag = number
+                            rotationDegree += 360
+                            }
+                            rotationDegree = 0
                         } label: {
                             FlagImage(image: countries[number])
+                                .rotation3DEffect(.degrees(number == pickedFlag ? rotationDegree : 0), axis: (x: 0, y: 1, z: 0))
                         }
                     }
                 }
