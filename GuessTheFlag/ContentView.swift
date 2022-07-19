@@ -31,6 +31,7 @@ struct ContentView: View {
     
     @State private var rotationDegree: Double = 0
     @State private var pickedFlag: Int = 0
+    @State private var tapped = false
     
     var body: some View {
         ZStack {
@@ -65,11 +66,15 @@ struct ContentView: View {
                             flagTapped(number)
                             pickedFlag = number
                             rotationDegree += 360
+                            tapped.toggle()
                             }
                             rotationDegree = 0
                         } label: {
                             FlagImage(image: countries[number])
                                 .rotation3DEffect(.degrees(number == pickedFlag ? rotationDegree : 0), axis: (x: 0, y: 1, z: 0))
+                                .opacity(tapped && (number != pickedFlag) ? 0.75 : 1)
+                                .animation(.default, value: tapped)
+                                
                         }
                     }
                 }
@@ -127,6 +132,7 @@ struct ContentView: View {
     }
     
     func askQuestion() {
+        tapped.toggle()
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
     }
