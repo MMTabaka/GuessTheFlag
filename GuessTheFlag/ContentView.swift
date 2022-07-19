@@ -17,6 +17,21 @@ struct FlagImage: View {
     }
 }
 
+extension View {
+    /// Applies the given transform if the given condition evaluates to `true`.
+    /// - Parameters:
+    ///   - condition: The condition to evaluate.
+    ///   - transform: The transform to apply to the source `View`.
+    /// - Returns: Either the original `View` or the modified `View` if the condition is `true`.
+    @ViewBuilder func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
+        if condition {
+            transform(self)
+        } else {
+            self
+        }
+    }
+}
+
 struct ContentView: View {
     @State private var showingScore = false
     @State private var showingEnd = false
@@ -72,8 +87,10 @@ struct ContentView: View {
                         } label: {
                             FlagImage(image: countries[number])
                                 .rotation3DEffect(.degrees(number == pickedFlag ? rotationDegree : 0), axis: (x: 0, y: 1, z: 0))
-                                .opacity(tapped && (number != pickedFlag) ? 0.75 : 1)
-                                .animation(.default, value: tapped)
+                                .opacity(tapped && (number != pickedFlag) ? 0.25 : 1)
+                                .scaleEffect(tapped ? 0.6 : 1)
+                                .animation(.easeIn, value: tapped)
+                                .transition(.scale)
                                 
                         }
                     }
